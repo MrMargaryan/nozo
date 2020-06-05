@@ -1,0 +1,30 @@
+.productWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.productInfo {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 400px) {
+    width: 100%;
+  }
+
+  & * {
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+}
+
+.select {
+  width: 95px !important;
+  height: 30px !important;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
