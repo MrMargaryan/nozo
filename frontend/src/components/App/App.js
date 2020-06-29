@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import HomeScreen from '../../screens/HomeScreen/HomeScreen'
 import ProductScreen from '../../screens/ProductScreen/ProductScreen'
 import CartScreen from '../../screens/CartScreen/CartScreen'
@@ -14,15 +15,16 @@ import ClientProfileScreen from '../../screens/ClientProfileScreen/ClientProfile
 import CheckoutScreen from '../../screens/CheckoutScreen/CheckoutScreen'
 import AdminProfileScreen from '../../screens/AdminProfileScreen/AdminProfileScreen'
 import ProductEditScreen from '../../screens/ProductEditScreen/ProductEditScreen'
+import OrderDetailScreen from '../../screens/OrderDetailScreen/OrderDetailScreen'
 
 import styles from './App.module.scss'
 
 const App = () => {
   return (
-    <>
+    <div className={styles.contentWrapper}>
       <Router>
         <Header />
-        <main className={styles.container}>
+        <main className={styles.container} style={{ paddingBottom: '20px !important' }}>
           <Switch>
             <Route exact path="/" component={HomeScreen} />
             <Route path="/product/:id" component={ProductScreen} />
@@ -33,10 +35,12 @@ const App = () => {
             <Route path="/admin-profile" component={AdminProfileScreen} />
             <Route path="/checkout" component={CheckoutScreen} />
             <Route path="/edit/:id" component={ProductEditScreen} />
+            <Route path="/order/:id" component={OrderDetailScreen} />
           </Switch>
         </main>
+        <Footer />
       </Router>
-    </>
+    </div>
   )
 }
 

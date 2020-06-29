@@ -9,7 +9,11 @@ import {
 } from './products/reducers'
 import cartReducer from './cart/reducers'
 import userReducer from './user/reducers'
-import { orderCreateReducer } from './orders/reducers'
+import {
+  orderCreateReducer,
+  fetchUserOrdersReducer,
+  fetchOrderReducer
+} from './orders/reducers'
 
 export default combineReducers({
   products: fetchProductsReducer,
@@ -19,5 +23,7 @@ export default combineReducers({
   removeProduct: removeProductReducer,
   cart: cartReducer,
   user: userReducer,
-  createdOrder: orderCreateReducer
+  createdOrder: orderCreateReducer,
+  userOrders: fetchUserOrdersReducer,
+  order: fetchOrderReducer
 })

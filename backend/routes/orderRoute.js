@@ -25,14 +25,7 @@ router.post('/', verify, async (req, res) => {
   try {
     const newOrder = new Order({
       user: req.user._id,
-      orderItems: [
-        {
-          name: "Nike"
-        },
-        {
-          name: "Adidas"
-        }
-      ],
+      orderItems: req.body.orderItems,
       shipping: req.body.shipping,
       payment: req.body.payment,
       totalPrice: req.body.totalPrice,
@@ -45,6 +38,16 @@ router.post('/', verify, async (req, res) => {
   } catch (error) {
     res.status(400).send(error.message)
   }
+})
+
+router.get('/user', verify, async (req, res) => {
+  const orders = await Order.find({ user: req.user._id })
+  res.send(orders)
+})
+
+router.get('/:id', verify, async (req, res) => {
+  const order = await Order.findById(req.params.id)
+  res.send(order)
 })
 
 export default router

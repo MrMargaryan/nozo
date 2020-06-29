@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { register, removeError } from '../../store/user/actions'
 import Button from '../../components/Button/Button'
@@ -6,7 +7,6 @@ import Button from '../../components/Button/Button'
 import styles from './RegisterScreen.module.scss'
 
 const RegisterScreen = ({ history }) => {
-  console.log(history)
   const dispatch = useDispatch()
   let { loading, error, entities } = useSelector(({ user }) => user)
   const [name, setName] = useState('')
@@ -78,6 +78,8 @@ const RegisterScreen = ({ history }) => {
 
         <div onClick={onRegisterButtonClick}><Button text="Зарегистрироваться" type="submit" /></div>
       </form>
+
+      <NavLink to="/login" className={styles.toLoginPageLink}>Уже есть аккаунт?</NavLink>
     </>
   )
 }

@@ -11,18 +11,19 @@ import 'react-credit-cards/es/styles.scss'
 
 const CheckoutScreen = ({ history }) => {
   const dispatch = useDispatch()
-  const cart = useSelector(({ cart }) => cart)
+  const cartItems = useSelector(({ cart }) => Object.values(cart))
+
   const loaded = useSelector(({ createdOrder }) => createdOrder.loaded)
   const [country, setCountry] = useState('')
   const [city, setCity] = useState('')
   const [address, setAddress] = useState('')
-  const [shippingError, setShippingError] = useState('')
+  const [shippingError, setShippingError] = useState(' ')
   const [cvc, setCvc] = useState('')
   const [expiry, setExpiry] = useState('')
   const [focused, setFocused] = useState('')
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
-  const [paymentError, setPaymentError] = useState('')
+  const [paymentError, setPaymentError] = useState(' ')
   const [isOrderInfoBeingFilled, setIsOrderInfoBeingFilled] = useState(false)
 
   const onCountryChange = event => {
@@ -98,12 +99,15 @@ const CheckoutScreen = ({ history }) => {
       const lastFourDigits = number.split(' ')[3]
 
       dispatch(createOrder({
+        orderItems: cartItems.map(({ id, quantity }) => ({ product: id, quantity: +quantity })),
         shipping: `${country}, ${city}, ${address}`,
-        payment: `**** **** **** ${lastFourDigits}`,
-        totalPrice: 350
+        payment: lastFourDigits,
+        totalPrice: cartItems.reduce((acc, { price, quantity }) => acc + +quantity * +price, 0)
       }))
+    } else {
+      console.log('error')
     }
-  }, [shippingError, paymentError])
+  }, [shippingError, paymentError, isOrderInfoBeingFilled])
 
   useEffect(() => {
     loaded && history.push('/client-profile')

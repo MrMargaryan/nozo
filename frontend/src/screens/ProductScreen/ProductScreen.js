@@ -48,13 +48,13 @@ const ProductScreen = ({ match: { params: { id } } }) => {
     switch (status) {
       case 'admin':
         return (
-          <NavLink to={`/edit/${id}`}>
+          <NavLink to={`/edit/${id}`} className={styles.button}>
             <Button text="Редактировать" type="button" />
           </NavLink>
         )
       default:
         return (
-          <div onClick={onAddToCartButtonClick} className={!countInStock && styles.addToCartButtonDisabled}>
+          <div onClick={onAddToCartButtonClick} className={countInStock ? styles.button : `${styles.button} ${styles.buttonActive}`}>
             <Button text="Добавить в корзину" type="button" />
           </div>
         )

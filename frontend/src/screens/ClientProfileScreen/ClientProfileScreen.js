@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { update, logout } from '../../store/user/actions'
+import ClientOrdersTable from '../../components/ClientOrdersTable/ClientOrdersTable'
 import Button from '../../components/Button/Button'
 
 import styles from './ClientProfileScreen.module.scss'
@@ -12,7 +13,6 @@ const ProfileScreen = ({ history }) => {
   const [newEmail, setNewEmail] = useState(email)
   const [newPassword, setNewPassword] = useState()
   const [isUpdateButtonClicked, setIsUpdateButtonClicked] = useState(false)
-
 
   const onNameChange = event => {
     setNewName(event.target.value)
@@ -84,7 +84,8 @@ const ProfileScreen = ({ history }) => {
         <div onClick={onLogoutButtonClick}><Button text="Выйти" type="button" /></div>
       </div>
       <div className={styles.orders}>
-        <h3>Заказы</h3>
+        <h3 className={styles.ordersTitle}>Заказы</h3>
+        <ClientOrdersTable />
       </div>
     </div>
   )

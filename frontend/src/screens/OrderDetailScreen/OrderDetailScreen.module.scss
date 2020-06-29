@@ -1,0 +1,38 @@
+.title {
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.id {
+  text-decoration: underline;
+}
+
+.orderInfo {
+  border: 1px solid #f0f0f0;
+  border-top: 2px solid #000000;
+  padding: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+
+  &Title {
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+}
+
+.orderItems {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.product {
+  text-decoration: none;
+  color: #207dff;
+}
+
+.text {
+  color: #207dff;
+  margin-bottom: 20px;
+}

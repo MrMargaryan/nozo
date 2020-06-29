@@ -47,6 +47,7 @@
   line-height: 1.7;
   font-weight: 300;
   margin-bottom: 24px;
+  word-break: break-all;
 }
 
 .price {
@@ -72,11 +73,15 @@
   color: #ff3220;
 }
 
-.addToCartButtonDisabled {
+.button {
   margin-top: 48px;
-  pointer-events: none;
+  width: fit-content;
 
-  & button {
-    background-color: #207dff86;
+  &Active {
+    pointer-events: none;
+
+    & button {
+      background-color: #207dff86;
+    }
   }
 }

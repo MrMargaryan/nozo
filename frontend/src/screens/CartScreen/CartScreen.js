@@ -10,7 +10,6 @@ import styles from './CartScreen.module.scss'
 const CartScreen = ({ history }) => {
   const dispatch = useDispatch()
   const products = useSelector(({ cart }) => Object.values(cart))
-  console.log(products.length)
   const productsQuantity = products.reduce((acc, { quantity }) => acc + +quantity, 0)
   const totalPrice = products.reduce((acc, { price, quantity }) => acc + +quantity * +price, 0)
   const user = useSelector(({ user }) => user.entities._id)
