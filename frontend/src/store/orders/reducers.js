@@ -1,32 +1,30 @@
 import {
-  FETCH_PRODUCT_REQUEST,
-  FETCH_PRODUCT_SUCCESS,
-  FETCH_PRODUCT_FAIL
+  ORDER_CREATE_REQUEST,
+  ORDER_CREATE_SUCCESS,
+  ORDER_CREATE_FAIL
 } from './types'
 
-const initialState = {
+const orderCreateInitialState = {
   loading: false,
   loaded: false,
-  error: null,
-  entities: {}
+  error: null
 }
 
-export default (state = initialState, action) => {
+export const orderCreateReducer = (state = orderCreateInitialState, action) => {
   switch (action.type) {
-    case FETCH_PRODUCT_REQUEST:
+    case ORDER_CREATE_REQUEST:
       return {
         ...state,
         loading: true
       }
-    case FETCH_PRODUCT_SUCCESS:
+    case ORDER_CREATE_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        error: null,
-        entities: action.payload
+        error: null
       }
-    case FETCH_PRODUCT_FAIL:
+    case ORDER_CREATE_FAIL:
       return {
         ...state,
         loading: false,

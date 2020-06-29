@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux'
 
-import productsReducer from './products/reducers'
-import productReducer from './product/reducers'
+import { fetchProductsReducer, fetchProductReducer } from './products/reducers'
 import cartReducer from './cart/reducers'
 import userReducer from './user/reducers'
+import { orderCreateReducer } from './orders/reducers'
 
 export default combineReducers({
-  products: productsReducer,
-  product: productReducer,
+  products: fetchProductsReducer,
+  product: fetchProductReducer,
   cart: cartReducer,
-  user: userReducer
+  user: userReducer,
+  createdOrder: orderCreateReducer
 })

@@ -1,34 +1,31 @@
 import express from 'express'
 import data from './data'
-// import config from 'config'
+import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import userRoute from './routes/userRoute'
-import bodyParser from 'body-parser'
+import orderRoute from './routes/orderRoute'
+import productRoute from './routes/productRoute'
 
-// const mongodbUrl = config.get('mongoUri')
+dotenv.config()
+
+// const mongodbUrl = process.env.DB
 const mongodbUrl = 'mongodb+srv://hamlet:hamlet12345@cluster0-uegsu.azure.mongodb.net/nozo?retryWrites=true&w=majority'
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
-}).catch(error => console.log('hello'))
+}).catch(error => console.log(error))
 
 const app = express()
 
-app.use(bodyParser.json())
+app.use(express.json())
 
-app.use('/api/users', userRoute)
+app.use('/api/user', userRoute)
 
-app.get('/api/products', (req, res) => {
-  res.send(data.products)
-})
+app.use('/api/orders', orderRoute)
 
-app.get('/api/products/:id', (req, res) => {
-  const product = data.products.find(product => product._id === req.params.id)
+app.use('/api/products', productRoute)
 
-  product ? res.send(product) : res.status(404).send({ msg: 'Товар не найден' })
-})
+const PORT = process.env.PORT || 5000
 
-// const PORT = config.get('port') || 5000
-
-app.listen(5000, () => console.log(`Server started at http://localhost:5000`))
+app.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`))

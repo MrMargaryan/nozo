@@ -1,0 +1,93 @@
+.title {
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.breadcrump {
+  color: #207dff;
+}
+
+.containers {
+  margin-top: 5px;
+
+  @media (min-width: 1024px) {
+    display: flex;
+  }
+}
+
+.container {
+  border: 1px solid #f0f0f0;
+  border-top: 2px solid #000000;
+  padding: 15px;
+  margin-bottom: 30px;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+
+    &:not(:last-of-type) {
+      margin-right: 30px;
+    }
+  }
+
+  &Title {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 15px;
+
+    @media (min-width: 768px) {
+      font-size: 22px;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.error {
+  font-size: 14px;
+  color: #ff2020;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-size: 14px;
+  color: #555555;
+}
+
+.input {
+  width: 100%;
+  font-size: 14px;
+  height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #f0f0f0;
+  margin-top: 3px;
+  margin-bottom: 15px;
+
+  &Name {
+    text-transform: uppercase;
+  }
+}
+
+.expiryAndCvc {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &Input {
+    padding: 2px;
+    width: 50%;
+  }
+}
+
+.orderFinishButton {
+  & button {
+    width: 100%;
+
+    @media (min-width: 1024px) {
+      width: auto;
+    }
+  }
+}

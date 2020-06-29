@@ -1,6 +1,11 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from './types'
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_DISCARD
+} from './types'
+import cookie from 'js-cookie'
 
-export default (state = {}, action) => {
+export default (state = cookie.getJSON('cart') || {}, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       if (state[action.payload.id]) {
@@ -16,6 +21,8 @@ export default (state = {}, action) => {
     case CART_REMOVE_ITEM:
       const { [action.payload]: deletedValue, ...newState } = state
       return newState
+    case CART_DISCARD:
+      return {}
     default:
       return state
   }

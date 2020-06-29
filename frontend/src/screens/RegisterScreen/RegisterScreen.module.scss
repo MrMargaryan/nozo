@@ -1,0 +1,40 @@
+.title {
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.error {
+  font-size: 14px;
+  color: #ff2020;
+  margin-bottom: 5px;
+}
+
+.label {
+  font-size: 14px;
+  color: #555555;
+}
+
+.input {
+  width: 100%;
+  max-width: 800px;
+  font-size: 14px;
+  height: 34px;
+  padding: 6px 10px;
+  border: 1px solid #f0f0f0;
+  margin-top: 3px;
+
+  &:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+}
+
+.advice {
+  font-size: 14px;
+  margin-bottom: 15px;
+}

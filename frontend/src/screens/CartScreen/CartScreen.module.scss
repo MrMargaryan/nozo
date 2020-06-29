@@ -1,30 +1,110 @@
-.productWrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.title {
+  font-weight: 300;
+  margin-bottom: 30px;
 }
 
-.productInfo {
+.cart {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
 
-  @media (max-width: 400px) {
+.cartItem {
+  display: flex;
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.image {
+  width: 70px;
+  height: 100px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+
+  @media (min-width: 768px) {
     width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.name {
+  color: #000000;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 15px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #207dff;
+    transition: color 0.2s;
   }
 
-  & * {
-    margin-bottom: 10px;
-    margin-right: 10px;
+  @media (min-width: 768px) {
+    width: 270px;
+    word-break: break-all;
+    overflow: auto;
+    white-space: unset;
+    text-overflow: unset;
   }
 }
 
 .select {
-  width: 95px !important;
-  height: 30px !important;
+  width: 40px;
+  margin-bottom: 5px;
 }
 
-.name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.deleteButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #ff2020;
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: 300;
+  width: fit-content;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+.price {
+  @media (min-width: 768px) {
+    font-size: 20px;
+    width: 20%;
+    text-align: right;
+  }
+}
+
+.totalPriceWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 300;
+  margin-bottom: 30px;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.totalPrice {
+  color: #207dff;
+}
+
+.checkoutButtonDisabled {
+  pointer-events: none;
+
+  & button {
+    background-color: #207dff86;
+  }
 }

@@ -6,8 +6,8 @@ export default {
       category: 'Shirts',
       image: '/images/pants.jpg',
       price: 60,
-      brand: ' Nike',
-      rating: 4.5,
+      brand: 'Nike',
+      rating: 4,
       numReviews: 10,
       countInStock: 10
     },
@@ -17,8 +17,8 @@ export default {
       category: 'Shirts',
       image: '/images/pants.jpg',
       price: 50,
-      brand: ' Nike',
-      rating: 4.2,
+      brand: 'Nike',
+      rating: 4,
       numReviews: 5,
       countInStock: 1
     },
@@ -28,18 +28,18 @@ export default {
       category: 'Pants',
       image: '/images/pants.jpg',
       price: 70,
-      brand: ' Nike',
-      rating: 4.5,
+      brand: 'Nike',
+      rating: 5,
       numReviews: 8,
-      countInStock: 9
+      countInStock: 0
     }, {
       _id: '4',
       name: 'Best Pants',
       category: 'Pants',
       image: '/images/pants.jpg',
       price: 70,
-      brand: ' Nike',
-      rating: 4.5,
+      brand: 'Nike',
+      rating: 5,
       numReviews: 8,
       countInStock: 7
     },
