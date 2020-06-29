@@ -8,10 +8,12 @@ import styles from './HomeScreen.module.scss'
 const HomeScreen = () => {
   const dispatch = useDispatch()
   const { loading, loaded, error, entities } = useSelector(({ products }) => products)
+  const editProduct = useSelector(({ editProduct }) => editProduct)
+  const removeProduct = useSelector(({ removeProduct }) => removeProduct)
 
   useEffect(() => {
     dispatch(fetchProducts())
-  }, [])
+  }, [editProduct, removeProduct])
 
   if (loading) {
     return <span>Загрузка...</span>
@@ -31,6 +33,7 @@ const HomeScreen = () => {
         entities.map(({ _id, name, image, price, brand, rating, numReviews }) => {
           return (
             <Product
+              key={_id}
               id={_id}
               name={name}
               image={image}

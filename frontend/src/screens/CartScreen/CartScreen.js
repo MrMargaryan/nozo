@@ -82,7 +82,7 @@ const CartScreen = ({ history }) => {
         <span>Итого ({productsQuantity} {productsEnding()}): </span>
         <span className={styles.totalPrice}>&#8381;{totalPrice}</span>
       </p>
-      <div onClick={onCheckoutButtonClick} className={!products.length && styles.checkoutButtonDisabled}>
+      <div onClick={onCheckoutButtonClick} className={products.length ? styles.checkoutButtonActive : styles.checkoutButtonDisabled}>
         <Button text="Оформить заказ" type="button" />
       </div>
     </>

@@ -13,6 +13,7 @@ import RegisterScreen from '../../screens/RegisterScreen/RegisterScreen'
 import ClientProfileScreen from '../../screens/ClientProfileScreen/ClientProfileScreen'
 import CheckoutScreen from '../../screens/CheckoutScreen/CheckoutScreen'
 import AdminProfileScreen from '../../screens/AdminProfileScreen/AdminProfileScreen'
+import ProductEditScreen from '../../screens/ProductEditScreen/ProductEditScreen'
 
 import styles from './App.module.scss'
 
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="/client-profile" component={ClientProfileScreen} />
             <Route path="/admin-profile" component={AdminProfileScreen} />
             <Route path="/checkout" component={CheckoutScreen} />
+            <Route path="/edit/:id" component={ProductEditScreen} />
           </Switch>
         </main>
       </Router>

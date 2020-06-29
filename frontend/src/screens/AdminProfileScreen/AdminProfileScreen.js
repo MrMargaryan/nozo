@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../../store/products/actions'
+import { logout } from '../../store/user/actions'
 import Button from '../../components/Button/Button'
 
 import styles from './AdminProfileScreen.module.scss'
 
-const AdminProfileScreen = () => {
+const AdminProfileScreen = ({ history }) => {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
@@ -61,6 +62,11 @@ const AdminProfileScreen = () => {
       setCountInStock('')
       setDescription('')
     }
+  }
+
+  const onLogoutButtonClick = () => {
+    dispatch(logout())
+    history.push('/')
   }
 
   return (
@@ -127,6 +133,7 @@ const AdminProfileScreen = () => {
           </div>
         </form>
       </div>
+      <div onClick={onLogoutButtonClick} className={styles.logoutButton}><Button text="Выйти" type="button" /></div>
     </>
   )
 }

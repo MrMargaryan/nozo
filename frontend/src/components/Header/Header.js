@@ -14,10 +14,14 @@ const Header = () => {
       <NavLink to="/" className={styles.logo}>Nozo</NavLink>
 
       <div>
-        <NavLink to="/cart" className={styles.cartIcon}>
-          <FaShoppingCart className={styles.icon} />
-          {productsQuantity !== 0 && <span className={styles.quantity}>{productsQuantity}</span>}
-        </NavLink>
+        {
+          (status === 'client' || !status) && (
+            <NavLink to="/cart" className={styles.cartIcon}>
+              <FaShoppingCart className={styles.icon} />
+              {productsQuantity !== 0 && <span className={styles.quantity}>{productsQuantity}</span>}
+            </NavLink>
+          )
+        }
         {
           status
             ? <NavLink to={`/${status}-profile`}><FaUser className={styles.icon} /></NavLink>

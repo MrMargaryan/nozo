@@ -7,7 +7,13 @@ import {
   FETCH_PRODUCT_FAIL,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_REQUEST,
-  ADD_PRODUCT_FAIL
+  ADD_PRODUCT_FAIL,
+  EDIT_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_REQUEST,
+  EDIT_PRODUCT_FAIL,
+  REMOVE_PRODUCT_REQUEST,
+  REMOVE_PRODUCT_SUCCESS,
+  REMOVE_PRODUCT_FAIL
 } from './types'
 
 // FETCH PRODUCTS REDUCER
@@ -108,5 +114,73 @@ export const addProductReducer = (state = addProductInitialState, action) => {
         loaded: true,
         error: action.payload
       }
+    default:
+      return state
+  }
+}
+
+// EDIT PRODUCT REDUCER
+const editProductInitialState = {
+  loading: false,
+  loaded: false,
+  error: null
+}
+
+export const editProductReducer = (state = editProductInitialState, action) => {
+  switch (action.type) {
+    case EDIT_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case EDIT_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      }
+    case EDIT_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+// REMOVE PRODUCT REDUCER
+const removeProductInitialState = {
+  loading: false,
+  loaded: false,
+  error: null
+}
+
+export const removeProductReducer = (state = removeProductInitialState, action) => {
+  switch (action.type) {
+    case REMOVE_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case REMOVE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      }
+    case REMOVE_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: action.payload
+      }
+    default:
+      return state
   }
 }

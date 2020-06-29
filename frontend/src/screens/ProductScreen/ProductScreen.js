@@ -10,6 +10,7 @@ import styles from './ProductScreen.module.scss'
 
 const ProductScreen = ({ match: { params: { id } } }) => {
   const dispatch = useDispatch()
+  const status = useSelector(({ user }) => user.entities.status)
   const { loading, loaded, error, entities: { name, brand, price, description, countInStock } } = useSelector(({ product }) => product)
 
   const [totalPrice, setTotalPrice] = useState(price)
@@ -43,6 +44,23 @@ const ProductScreen = ({ match: { params: { id } } }) => {
     return <span>Извините, произошла ошибка</span>
   }
 
+  const renderButton = () => {
+    switch (status) {
+      case 'admin':
+        return (
+          <NavLink to={`/edit/${id}`}>
+            <Button text="Редактировать" type="button" />
+          </NavLink>
+        )
+      default:
+        return (
+          <div onClick={onAddToCartButtonClick} className={!countInStock && styles.addToCartButtonDisabled}>
+            <Button text="Добавить в корзину" type="button" />
+          </div>
+        )
+    }
+  }
+
   return (
     <>
       <NavLink to="/" className={styles.breadcrump}>Перейти к товарам</NavLink>
@@ -74,9 +92,10 @@ const ProductScreen = ({ match: { params: { id } } }) => {
               )
               : <p className={styles.stockWarning}>Нет в наличии</p>
           }
-          <div onClick={onAddToCartButtonClick} className={countInStock ? styles.addToCartButtonActive : styles.addToCartButtonDisabled}>
-            <Button text="Добавить в корзину" type="button" />
-          </div>
+          {
+
+          }
+          {renderButton()}
         </div>
       </div>
     </>

@@ -7,7 +7,13 @@ import {
   FETCH_PRODUCT_FAIL,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_REQUEST,
-  ADD_PRODUCT_FAIL
+  ADD_PRODUCT_FAIL,
+  EDIT_PRODUCT_SUCCESS,
+  EDIT_PRODUCT_REQUEST,
+  EDIT_PRODUCT_FAIL,
+  REMOVE_PRODUCT_SUCCESS,
+  REMOVE_PRODUCT_REQUEST,
+  REMOVE_PRODUCT_FAIL
 } from './types'
 import axios from 'axios'
 
@@ -70,3 +76,44 @@ export const addProduct = product => async (dispatch, getState) => {
   }
 }
 
+export const editProduct = (id, product) => async (dispatch, getState) => {
+  dispatch({
+    type: EDIT_PRODUCT_REQUEST
+  })
+
+  try {
+    const { user: { entities: { token } } } = getState()
+
+    await axios.put(`/api/products/${id}`, product, { headers: { token } })
+
+    dispatch({
+      type: EDIT_PRODUCT_SUCCESS
+    })
+  } catch (error) {
+    dispatch({
+      type: EDIT_PRODUCT_FAIL,
+      payload: error.message
+    })
+  }
+}
+
+export const removeProduct = id => async (dispatch, getState) => {
+  dispatch({
+    type: REMOVE_PRODUCT_REQUEST
+  })
+
+  try {
+    const { user: { entities: { token } } } = getState()
+
+    await axios.delete(`/api/products/${id}`, { headers: { token } })
+
+    dispatch({
+      type: REMOVE_PRODUCT_SUCCESS
+    })
+  } catch (error) {
+    dispatch({
+      type: REMOVE_PRODUCT_FAIL,
+      payload: error.message
+    })
+  }
+}

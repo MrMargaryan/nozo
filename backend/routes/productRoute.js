@@ -63,4 +63,40 @@ router.post('/', verify, isAdmin, async (req, res) => {
   }
 })
 
+router.put('/:id', verify, isAdmin, async (req, res) => {
+  const id = req.params.id
+
+  const product = await Product.findById(id)
+
+  if (product) {
+    product.name = req.body.name
+    product.image = req.body.image
+    product.brand = req.body.brand
+    product.price = req.body.price
+    product.countInStock = req.body.countInStock
+    product.description = req.body.description
+
+    try {
+      const newProduct = await product.save()
+
+      res.send(newProduct)
+    } catch (error) {
+      res.status(400).send(error.message)
+    }
+  } else {
+    res.status(400).send('Произошла ошибка')
+  }
+})
+
+router.delete('/:id', verify, isAdmin, async (req, res) => {
+  const deletedProduct = await Product.findById(req.params.id)
+
+  if (deletedProduct) {
+    await deletedProduct.remove()
+    res.send('Товар удален')
+  } else {
+    res.status(400).send('Ошибка в удалении товара')
+  }
+})
+
 export default router
