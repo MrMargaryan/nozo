@@ -8,8 +8,7 @@ import productRoute from './routes/productRoute'
 
 dotenv.config()
 
-// const mongodbUrl = process.env.DB
-const mongodbUrl = 'mongodb+srv://hamlet:hamlet12345@cluster0-uegsu.azure.mongodb.net/nozo?retryWrites=true&w=majority'
+const mongodbUrl = process.env.DB
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
