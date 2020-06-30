@@ -29,7 +29,7 @@ const Product = ({ id, name, image, price, brand, rating, numReviews }) => {
 
   return (
     <div className={styles.card}>
-      <NavLink to={`/product/${id}`}><img className={styles.image} src={image} alt={name} /></NavLink>
+      <NavLink to={`/product/${id}`}><img className={styles.image} src={airmax} alt={name} /></NavLink>
       <div className={styles.content}>
         <h4><NavLink to={`/product/${id}`} className={styles.name}>{name}</NavLink></h4>
         <p className={styles.brand}>{brand}</p>
