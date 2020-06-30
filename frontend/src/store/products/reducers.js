@@ -13,7 +13,10 @@ import {
   EDIT_PRODUCT_FAIL,
   REMOVE_PRODUCT_REQUEST,
   REMOVE_PRODUCT_SUCCESS,
-  REMOVE_PRODUCT_FAIL
+  REMOVE_PRODUCT_FAIL,
+  ADD_REVIEW_SUCCESS,
+  ADD_REVIEW_REQUEST,
+  ADD_REVIEW_FAIL
 } from './types'
 
 // FETCH PRODUCTS REDUCER
@@ -174,6 +177,39 @@ export const removeProductReducer = (state = removeProductInitialState, action) 
         error: null
       }
     case REMOVE_PRODUCT_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+// ADD REVIEW REDUCER
+const addReviewInitialState = {
+  loading: false,
+  loaded: false,
+  error: null
+}
+
+export const addReviewReducer = (state = addReviewInitialState, action) => {
+  switch (action.type) {
+    case ADD_REVIEW_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case ADD_REVIEW_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      }
+    case ADD_REVIEW_FAIL:
       return {
         ...state,
         loading: false,

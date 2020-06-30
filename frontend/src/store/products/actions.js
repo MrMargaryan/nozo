@@ -13,7 +13,10 @@ import {
   EDIT_PRODUCT_FAIL,
   REMOVE_PRODUCT_SUCCESS,
   REMOVE_PRODUCT_REQUEST,
-  REMOVE_PRODUCT_FAIL
+  REMOVE_PRODUCT_FAIL,
+  ADD_REVIEW_SUCCESS,
+  ADD_REVIEW_REQUEST,
+  ADD_REVIEW_FAIL
 } from './types'
 import axios from 'axios'
 
@@ -36,13 +39,13 @@ export const fetchProduct = id => async dispatch => {
   }
 }
 
-export const fetchProducts = () => async dispatch => {
+export const fetchProducts = (term, brand, sort) => async dispatch => {
   try {
     dispatch({
       type: FETCH_PRODUCTS_REQUEST
     })
-
-    const { data } = await axios.get('/api/products')
+    console.log(brand, sort)
+    const { data } = await axios.get(`/api/products?term=${term}&brand=${brand}&sort=${sort}`)
     dispatch({
       type: FETCH_PRODUCTS_SUCCESS,
       payload: data
@@ -113,6 +116,27 @@ export const removeProduct = id => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: REMOVE_PRODUCT_FAIL,
+      payload: error.message
+    })
+  }
+}
+
+export const addReview = (id, rating, comment) => async (dispatch, getState) => {
+  dispatch({
+    type: ADD_REVIEW_REQUEST
+  })
+
+  try {
+    const { user: { entities: { name, token } } } = getState()
+
+    await axios.post(`/api/products/review/${id}`, { name, rating, comment }, { headers: { token } })
+
+    dispatch({
+      type: ADD_REVIEW_SUCCESS
+    })
+  } catch (error) {
+    dispatch({
+      type: ADD_REVIEW_FAIL,
       payload: error.message
     })
   }

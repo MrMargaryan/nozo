@@ -34,9 +34,6 @@ const orderSchema = new mongoose.Schema({
   isDelivered: {
     type: Boolean,
     required: true
-  },
-  deliveredAt: {
-    type: Date
   }
 }, { timestamps: true })
 

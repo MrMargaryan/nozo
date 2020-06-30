@@ -46,7 +46,7 @@ const ClientOrdersTable = () => {
                 const time = createdAt.split('.')[0].split('T')[1]
 
                 return (
-                  <tr key={_id} className={styles.orderInfo}>
+                  <tr key={_id}>
                     <td className={styles.rowItems}>{shipping}</td>
                     <td className={styles.rowItems}>{payment}</td>
                     <td className={styles.rowItems}>&#8381;{totalPrice}</td>

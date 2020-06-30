@@ -40,11 +40,15 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  rating: {
+    type: Number,
+    required: true
+  },
   numReviews: {
-    type: String,
+    type: Number,
     required: true,
   },
-  // reviews: [reviewSchema]
+  reviews: [reviewSchema]
 })
 
 const productModel = mongoose.model('Product', productSchema)

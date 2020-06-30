@@ -19,6 +19,13 @@ const verify = (req, res, next) => {
   }
 }
 
+const isOperator = (req, res, next) => {
+  if (req.user && req.user.status === 'operator')
+    return next()
+
+  return res.status(400).send('Ошбика доступа')
+}
+
 const router = express.Router()
 
 router.post('/', verify, async (req, res) => {
@@ -45,9 +52,32 @@ router.get('/user', verify, async (req, res) => {
   res.send(orders)
 })
 
+router.get('/all', verify, isOperator, async (req, res) => {
+  const orders = await Order.find()
+  res.send(orders)
+})
+
+router.put('/isDelivered', verify, isOperator, async (req, res) => {
+  const order = await Order.findById(req.body.id)
+
+  if (order) {
+    order.isDelivered = req.body.isDelivered
+
+    try {
+      const newOrder = await order.save()
+      res.send(newOrder)
+    } catch (error) {
+      res.status(400).send(error.message)
+    }
+  } else {
+    res.status(400).send('Произошла ошибка')
+  }
+})
+
 router.get('/:id', verify, async (req, res) => {
   const order = await Order.findById(req.params.id)
   res.send(order)
 })
+
 
 export default router

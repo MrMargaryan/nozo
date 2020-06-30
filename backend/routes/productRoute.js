@@ -29,7 +29,23 @@ const isAdmin = (req, res, next) => {
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const products = await Product.find()
+  const term = req.query.term
+    ? {
+      name: {
+        $regex: req.query.term,
+        $options: 'i'
+      }
+    } : {}
+
+  const brand = req.query.brand ? { brand: req.query.brand } : {}
+
+  const sort = req.query.sort
+    ? req.query.sort === 'lowest'
+      ? { price: 1 }
+      : { price: -1 }
+    : { _id: -1 }
+
+  const products = await Product.find({ ...term, ...brand }).sort(sort)
   res.send(products)
 })
 
@@ -42,6 +58,31 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.post('/review/:id', verify, async (req, res) => {
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    const review = {
+      name: req.body.name,
+      rating: req.body.rating,
+      comment: req.body.comment
+    }
+
+    product.reviews.push(review)
+    product.numReviews = product.reviews.length
+    product.rating = Math.round(product.reviews.reduce((acc, review) => review.rating + acc, 0) / product.reviews.length)
+
+    try {
+      const updatedProduct = await product.save()
+      res.send(updatedProduct.reviews[updatedProduct.reviews.length - 1])
+    } catch (error) {
+      res.status(400).send(error.message)
+    }
+  } else {
+    res.status(400).send('Произошла ошибка')
+  }
+})
+
 router.post('/', verify, isAdmin, async (req, res) => {
   try {
     const product = new Product({
@@ -51,6 +92,7 @@ router.post('/', verify, isAdmin, async (req, res) => {
       price: req.body.price,
       countInStock: req.body.countInStock,
       description: req.body.description,
+      rating: 0,
       numReviews: 0
     })
 

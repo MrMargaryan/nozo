@@ -5,14 +5,17 @@ import {
   fetchProductReducer,
   addProductReducer,
   editProductReducer,
-  removeProductReducer
+  removeProductReducer,
+  addReviewReducer
 } from './products/reducers'
 import cartReducer from './cart/reducers'
 import userReducer from './user/reducers'
 import {
   orderCreateReducer,
   fetchUserOrdersReducer,
-  fetchOrderReducer
+  fetchOrderReducer,
+  fetchOrdersReducer,
+  changeIsDeliveredReducer
 } from './orders/reducers'
 
 export default combineReducers({
@@ -21,9 +24,12 @@ export default combineReducers({
   addProduct: addProductReducer,
   editProduct: editProductReducer,
   removeProduct: removeProductReducer,
+  addReview: addReviewReducer,
   cart: cartReducer,
   user: userReducer,
   createdOrder: orderCreateReducer,
   userOrders: fetchUserOrdersReducer,
-  order: fetchOrderReducer
+  order: fetchOrderReducer,
+  orders: fetchOrdersReducer,
+  changeIsDelivered: changeIsDeliveredReducer
 })

@@ -1,5 +1,11 @@
+.title {
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
 .tableWrapper {
   position: relative;
+  margin-bottom: 20px;
 }
 
 .tableScroll {
@@ -23,4 +29,10 @@
   font-size: 24px;
   text-decoration: none;
   color: #207dff;
+}
+
+.logoutButton {
+  & button {
+    background-color: #ff2020;
+  }
 }

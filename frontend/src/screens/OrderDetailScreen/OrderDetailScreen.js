@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrder } from '../../store/orders/actions'
+import QRCode from 'qrcode.react'
 
 import styles from './OrderDetailScreen.module.scss'
 
@@ -33,7 +34,7 @@ const OrderDetailScreen = ({ match: { params: { id } } }) => {
         <div className={styles.orderItems}>
           {
             Object.keys(entities).length > 0 && (
-              entities.orderItems.map(({ product }) => <NavLink to={`/product/${product}`} className={styles.product}>Товар {product}</NavLink>)
+              entities.orderItems.map(({ product, quantity }) => <NavLink to={`/product/${product}`} className={styles.product}>Товар {product} (количество: {quantity})</NavLink>)
             )
           }
         </div>
@@ -56,6 +57,9 @@ const OrderDetailScreen = ({ match: { params: { id } } }) => {
 
         <h3 className={styles.orderInfoTitle}>Доставлено</h3>
         <p className={styles.text}>{entities.isDelivered ? 'Да' : 'Нет'}</p>
+
+        <h3 className={styles.orderInfoTitle}>Электронный чек</h3>
+        <QRCode value={`${id} это гг`} />
       </div>
     </>
   )

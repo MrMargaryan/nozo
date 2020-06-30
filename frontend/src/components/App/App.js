@@ -16,6 +16,7 @@ import CheckoutScreen from '../../screens/CheckoutScreen/CheckoutScreen'
 import AdminProfileScreen from '../../screens/AdminProfileScreen/AdminProfileScreen'
 import ProductEditScreen from '../../screens/ProductEditScreen/ProductEditScreen'
 import OrderDetailScreen from '../../screens/OrderDetailScreen/OrderDetailScreen'
+import OperatorProfileScreen from '../../screens/OperatorProfileScreen/OperatorProfileScreen'
 
 import styles from './App.module.scss'
 
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/register" component={RegisterScreen} />
             <Route path="/client-profile" component={ClientProfileScreen} />
             <Route path="/admin-profile" component={AdminProfileScreen} />
+            <Route path="/operator-profile" component={OperatorProfileScreen} />
             <Route path="/checkout" component={CheckoutScreen} />
             <Route path="/edit/:id" component={ProductEditScreen} />
             <Route path="/order/:id" component={OrderDetailScreen} />

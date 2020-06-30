@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { fetchProduct } from '../../store/products/actions'
+import { fetchProduct, addReview, fetchProducts } from '../../store/products/actions'
 import { addToCart } from '../../store/cart/actions'
 import airmax from '../../images/airmax.jpg'
 import Button from '../../components/Button/Button'
@@ -11,13 +11,25 @@ import styles from './ProductScreen.module.scss'
 const ProductScreen = ({ match: { params: { id } } }) => {
   const dispatch = useDispatch()
   const status = useSelector(({ user }) => user.entities.status)
-  const { loading, loaded, error, entities: { name, brand, price, description, countInStock } } = useSelector(({ product }) => product)
+  const { loading, loaded, error, entities: { name, image, brand, price, description, countInStock, reviews } } = useSelector(({ product }) => product)
 
   const [totalPrice, setTotalPrice] = useState(price)
   const [quantity, setQuantity] = useState(1)
 
+  const [rating, setRating] = useState(1)
+  const [comment, setComment] = useState('')
+  const [commentError, setCommentError] = useState(false)
+
   const onQuantityChange = event => {
     setQuantity(event.target.value)
+  }
+
+  const onRatingChange = event => {
+    setRating(+event.target.value)
+  }
+
+  const onCommentChange = event => {
+    setComment(event.target.value)
   }
 
   useEffect(() => {
@@ -30,6 +42,24 @@ const ProductScreen = ({ match: { params: { id } } }) => {
 
   const onAddToCartButtonClick = () => {
     dispatch(addToCart(id, quantity))
+  }
+
+  const onAddReviewButtonClick = async event => {
+    event.preventDefault()
+    if (comment) {
+      await dispatch(addReview(id, rating, comment))
+      dispatch(fetchProduct(id))
+      setRating(1)
+      setComment('')
+      setCommentError(false)
+    }
+    else {
+      setCommentError(true)
+    }
+  }
+
+  const renderStars = rating => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating)
   }
 
   if (loading) {
@@ -75,7 +105,7 @@ const ProductScreen = ({ match: { params: { id } } }) => {
             countInStock
               ? (
                 <form className={styles.form}>
-                  <label htmlFor="quantity" className={styles.label}>Количество:</label>
+                  <label forHtml="quantity" className={styles.label}>Количество:</label>
                   <select name="quantity" id="quantity" value={quantity} onChange={onQuantityChange} className={styles.select}>
                     {
                       [...Array(countInStock).keys()].map(number =>
@@ -92,11 +122,55 @@ const ProductScreen = ({ match: { params: { id } } }) => {
               )
               : <p className={styles.stockWarning}>Нет в наличии</p>
           }
-          {
-
-          }
           {renderButton()}
         </div>
+      </div>
+      <div className={styles.reviewsWrapper}>
+        <div className={styles.customerReview}>
+          <h3 className={styles.customerReviewTitle}>Отзывы</h3>
+          <div>
+            {
+              reviews && reviews.length > 0 ? (
+                reviews.map(({ _id, name, comment, createdAt, rating }) => {
+                  const date = createdAt.split('.')[0].split('T')[0].split('-').reverse().join('/')
+                  const time = createdAt.split('.')[0].split('T')[1]
+
+                  return (
+                    <div key={_id} className={styles.review}>
+                      <p className={styles.author}>Автор: {name}</p>
+                      <p className={styles.stars}>{renderStars(rating)}</p>
+                      <p>{date} ({time})</p>
+                      <p className={styles.comment}>{comment}</p>
+                    </div>
+                  )
+                })
+              ) : <p>Отзывов нет</p>
+            }
+          </div>
+        </div>
+        {
+          status && (
+            <form className={styles.customerReview}>
+              <h3 className={styles.customerReviewTitle}>Оставить отзыв</h3>
+              {commentError && <p className={styles.error}>Заполните поле отзыв</p>}
+              <label forHtml="rating">Рейтинг</label>
+              <select name="rating" id="rating" value={rating} onChange={onRatingChange} className={styles.input}>
+                <option value="1">1 – Плохо</option>
+                <option value="2">2 – Средне</option>
+                <option value="3">3 –Хорошо</option>
+                <option value="4">4 – Очень хорошо</option>
+                <option value="5">5 – Великолепно</option>
+              </select>
+
+              <label forHtml="comment">Комментарий</label>
+              <textarea id="comment" name="comment" value={comment} onChange={onCommentChange} className={styles.input} />
+
+              <div onClick={onAddReviewButtonClick}>
+                <Button text="Оставить отзыв" type="submit" />
+              </div>
+            </form>
+          )
+        }
       </div>
     </>
   )

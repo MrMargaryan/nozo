@@ -7,7 +7,13 @@ import {
   FETCH_USER_ORDERS_FAIL,
   FETCH_ORDER_REQUEST,
   FETCH_ORDER_SUCCESS,
-  FETCH_ORDER_FAIL
+  FETCH_ORDER_FAIL,
+  FETCH_ORDERS_REQUEST,
+  FETCH_ORDERS_SUCCESS,
+  FETCH_ORDERS_FAIL,
+  CHANGE_IS_DELIVERED_REQUEST,
+  CHANGE_IS_DELIVERED_SUCCESS,
+  CHANGE_IS_DELIVERED_FAIL
 } from './types'
 
 // CREATE ORDER REDUCER
@@ -106,6 +112,74 @@ export const fetchOrderReducer = (state = fetchOrderInitialState, action) => {
         ...state,
         loading: false,
         loaded: false,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+// FETCH ORDERS REDUCER
+const fetchOrdersInitialState = {
+  loading: false,
+  loaded: false,
+  error: null,
+  entities: []
+}
+
+export const fetchOrdersReducer = (state = fetchOrdersInitialState, action) => {
+  switch (action.type) {
+    case FETCH_ORDERS_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case FETCH_ORDERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null,
+        entities: action.payload
+      }
+    case FETCH_ORDERS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.payload
+      }
+    default:
+      return state
+  }
+}
+
+// CHANGE IS_DELIVERED REDUCER
+const changeIsDeliveredInitialState = {
+  loading: false,
+  loaded: false,
+  error: null
+}
+
+export const changeIsDeliveredReducer = (state = changeIsDeliveredInitialState, action) => {
+  switch (action.type) {
+    case CHANGE_IS_DELIVERED_REQUEST:
+      return {
+        ...state,
+        loading: true
+      }
+    case CHANGE_IS_DELIVERED_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      }
+    case CHANGE_IS_DELIVERED_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
         error: action.payload
       }
     default:

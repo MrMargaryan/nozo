@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../../store/products/actions'
 import { logout } from '../../store/user/actions'
 import Button from '../../components/Button/Button'
@@ -8,6 +8,7 @@ import styles from './AdminProfileScreen.module.scss'
 
 const AdminProfileScreen = ({ history }) => {
   const dispatch = useDispatch()
+  const loaded = useSelector(({ addProduct }) => addProduct.loaded)
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
   const [brand, setBrand] = useState('Nike')
@@ -74,6 +75,7 @@ const AdminProfileScreen = ({ history }) => {
       <h2 className={styles.title}>Панель администратора</h2>
       <div className={styles.addProductBox}>
         <h3 className={styles.addProductBoxTitle}>Добавить товар</h3>
+        {(loaded && !error) && <p className={styles.success}>Товар добавлен</p>}
         <form className={styles.form}>
           {error && <p className={styles.error}>Введите все поля</p>}
           <label htmlFor="name" className={styles.label}>Название</label>
