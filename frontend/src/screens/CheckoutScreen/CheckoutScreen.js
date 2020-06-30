@@ -121,7 +121,7 @@ const CheckoutScreen = ({ history }) => {
         <div className={styles.container}>
           <h3 className={styles.containerTitle}>Доставка</h3>
           <form className={styles.form}>
-            {shippingError && <p className={styles.error}>{shippingError}</p>}
+            {shippingError && <p data-testid="shippingError" className={styles.error}>{shippingError}</p>}
             <label htmlFor="country" className={styles.label}>Страна</label>
             <input
               type="text"
@@ -166,7 +166,7 @@ const CheckoutScreen = ({ history }) => {
             number={number}
           />
           <form className={styles.form}>
-            {paymentError && <p className={styles.error}>{paymentError}</p>}
+            {paymentError && <p data-testid="paymentError" className={styles.error}>{paymentError}</p>}
             <label htmlFor="number" className={styles.label}>Номер карты</label>
             <InputMask
               mask="9999 9999 9999 9999"
@@ -225,7 +225,7 @@ const CheckoutScreen = ({ history }) => {
           </form>
         </div>
       </div>
-      <div onClick={onOrderFinishButtonClick} className={styles.orderFinishButton}>
+      <div data-testid="orderFinish" onClick={onOrderFinishButtonClick} className={styles.orderFinishButton}>
         <Button text="Выполнить заказ" type="button" />
       </div>
     </>

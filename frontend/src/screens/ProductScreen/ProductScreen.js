@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { fetchProduct, addReview, fetchProducts } from '../../store/products/actions'
+import { fetchProduct, addReview } from '../../store/products/actions'
 import { addToCart } from '../../store/cart/actions'
 import airmax from '../../images/airmax.jpg'
 import Button from '../../components/Button/Button'

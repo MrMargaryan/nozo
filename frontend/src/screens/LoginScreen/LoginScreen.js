@@ -48,7 +48,7 @@ const LoginScreen = ({ history }) => {
           <h3 className={styles.containerTitle}>Уже есть аккаунт?</h3>
           <form className={styles.form}>
             {loading && <p>Подождите...</p>}
-            {error && <p className={styles.error}>{error}</p>}
+            {error && <p data-testid="loginError" className={styles.error}>{error}</p>}
             <label htmlFor="email" className={styles.label}>Электронная почта</label>
             <input
               type="email"
@@ -69,7 +69,7 @@ const LoginScreen = ({ history }) => {
               className={styles.input}
             />
 
-            <div onClick={onLoginButtonClick}><Button text="Войти" type="submit" /></div>
+            <div data-testid="enter" onClick={onLoginButtonClick}><Button text="Войти" type="submit" /></div>
           </form>
         </div>
       </div>

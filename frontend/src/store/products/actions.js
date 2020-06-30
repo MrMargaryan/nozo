@@ -44,7 +44,7 @@ export const fetchProducts = (term, brand, sort) => async dispatch => {
     dispatch({
       type: FETCH_PRODUCTS_REQUEST
     })
-    console.log(brand, sort)
+
     const { data } = await axios.get(`/api/products?term=${term}&brand=${brand}&sort=${sort}`)
     dispatch({
       type: FETCH_PRODUCTS_SUCCESS,

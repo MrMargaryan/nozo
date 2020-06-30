@@ -92,10 +92,10 @@ const HomeScreen = () => {
         </form>
         <div>
           <span>Бренд</span>
-          <select name="brand" value={brand} onChange={onBrandChange} className={styles.input}>
+          <select data-testid="brand" name="brand" value={brand} onChange={onBrandChange} className={styles.input}>
             <option value="">Все</option>
-            <option value="Nike">Nike</option>
-            <option value="Adidas">Adidas</option>
+            <option data-testid="nike" value="Nike">Nike</option>
+            <option data-testid="adidas" value="Adidas">Adidas</option>
             <option value="Puma">Puma</option>
             <option value="Reebok">Reebok</option>
           </select>
