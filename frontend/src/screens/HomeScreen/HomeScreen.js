@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts, fetchProduct } from '../../store/products/actions'
+import { fetchProducts } from '../../store/products/actions'
 import Product from '../../components/Product/Product'
 import Button from '../../components/Button/Button'
 
@@ -48,32 +48,29 @@ const HomeScreen = () => {
   const renderProducts = () => {
     if (loading) {
       return <span>Загрузка...</span>
-    }
-
-    if (!entities.length && loaded) {
+    } else if (!entities.length && loaded) {
       return (
         <span>Данные отсутствуют</span>
       )
-    }
-
-    if (error) {
+    } else if (error) {
       return <span>Извините, произошла ошибка</span>
+    } else {
+      console.log(entities)
+      return entities.map(({ _id, name, image, price, brand, rating, numReviews }) => {
+        return (
+          <Product
+            key={_id}
+            id={_id}
+            name={name}
+            image={image}
+            price={price}
+            brand={brand}
+            rating={rating}
+            numReviews={numReviews}
+          />
+        )
+      })
     }
-
-    return entities.map(({ _id, name, image, price, brand, rating, numReviews }) => {
-      return (
-        <Product
-          key={_id}
-          id={_id}
-          name={name}
-          image={image}
-          price={price}
-          brand={brand}
-          rating={rating}
-          numReviews={numReviews}
-        />
-      )
-    })
   }
 
   return (

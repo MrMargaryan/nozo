@@ -1,6 +1,7 @@
 import express from 'express'
 import data from './data'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import mongoose from 'mongoose'
 import userRoute from './routes/userRoute'
 import orderRoute from './routes/orderRoute'
@@ -18,6 +19,8 @@ mongoose.connect(mongodbUrl, {
 const app = express()
 
 app.use(express.json())
+
+app.use(cors())
 
 app.use('/api/user', userRoute)
 
