@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
   console.log(__dirname)
 
   app.get('*', (req, res) => {
-    res.sendFile(__dirname + '../frontend/build/index.html')
+    res.sendFile('../frontend/build/index.html')
   })
 }
 
