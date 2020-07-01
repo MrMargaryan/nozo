@@ -1,5 +1,5 @@
 import express from 'express'
-import Product from '../models/productModel'
+import Product from '../models/productModel.js'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 

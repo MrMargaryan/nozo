@@ -1,5 +1,5 @@
 import express from 'express'
-import Order from '../models/orderModel'
+import Order from '../models/orderModel.js'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 

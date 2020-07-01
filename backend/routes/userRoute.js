@@ -1,6 +1,6 @@
 import express from 'express'
 import bcrypt from 'bcryptjs'
-import User from '../models/userModel'
+import User from '../models/userModel.js'
 import Joi from '@hapi/joi'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
