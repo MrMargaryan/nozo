@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch backend --exec babel-node backend/server.js",
+    "start:dev": "nodemon --watch backend --exec babel-node backend/server.js",
     "heroku-postbuild": "cd frontend && yarn && yarn build"
   },
   "repository": {
