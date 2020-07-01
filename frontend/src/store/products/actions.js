@@ -19,7 +19,6 @@ import {
   ADD_REVIEW_FAIL
 } from './types'
 import axios from 'axios'
-axios.defaults.baseURL = 'https://nozo.herokuapp.com/'
 
 export const fetchProduct = id => async dispatch => {
   try {
