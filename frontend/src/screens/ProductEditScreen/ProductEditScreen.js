@@ -11,7 +11,7 @@ const ProductEditScreen = ({ match: { params: { id } }, history }) => {
   const { loading, loaded, error, entities: { name, image, brand, price, countInStock, description } } = useSelector(({ product }) => product)
 
   const [newName, setNewName] = useState(name)
-  const [newImage, setNewImage] = useState()
+  const [newImage, setNewImage] = useState(image)
   const [newBrand, setNewBrand] = useState(brand)
   const [newPrice, setNewPrice] = useState(price)
   const [newCountInStock, setNewCountInStock] = useState(countInStock)

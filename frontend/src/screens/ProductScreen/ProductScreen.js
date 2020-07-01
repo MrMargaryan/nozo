@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { fetchProduct, addReview } from '../../store/products/actions'
 import { addToCart } from '../../store/cart/actions'
-import airmax from '../../images/airmax.jpg'
 import Button from '../../components/Button/Button'
 
 import styles from './ProductScreen.module.scss'
@@ -95,7 +94,7 @@ const ProductScreen = ({ match: { params: { id } } }) => {
     <>
       <NavLink to="/" className={styles.breadcrump}>Перейти к товарам</NavLink>
       <div className={styles.container}>
-        <img src={airmax} alt={name} className={styles.image} />
+        <img src={image} alt={name} className={styles.image} />
         <div className={styles.content}>
           <h2 className={styles.name}>{name}</h2>
           <p className={styles.brand}>{brand}</p>
