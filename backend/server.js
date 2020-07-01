@@ -31,6 +31,8 @@ app.use('/api/products', productRoute)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../frontend/build'))
 
+  const __dirname = path.resolve()
+
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build / index.html'))
   })
