@@ -3,13 +3,14 @@ import data from './data'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import path from 'path'
 import userRoute from './routes/userRoute'
 import orderRoute from './routes/orderRoute'
 import productRoute from './routes/productRoute'
 
 dotenv.config()
 
-const mongodbUrl = process.env.DB
+const mongodbUrl = process.env.MONGODB_URI
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -27,6 +28,14 @@ app.use('/api/user', userRoute)
 app.use('/api/orders', orderRoute)
 
 app.use('/api/products', productRoute)
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../frontend/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
+  })
+}
 
 const PORT = process.env.PORT || 5000
 
