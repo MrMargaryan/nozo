@@ -29,7 +29,7 @@ app.use('/api/orders', orderRoute)
 app.use('/api/products', productRoute)
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../frontend/build'))
+  app.use(express.static('/frontend/build'))
 
   const __dirname = path.resolve()
 
