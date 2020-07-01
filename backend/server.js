@@ -10,7 +10,7 @@ import productRoute from './routes/productRoute'
 
 dotenv.config()
 
-const mongodbUrl = process.env.MONGODB_URI
+const mongodbUrl = 'mongodb+srv://hamlet:hamlet12345@cluster0-uegsu.azure.mongodb.net/nozo?retryWrites=true&w=majority'
 mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -29,14 +29,6 @@ app.use('/api/orders', orderRoute)
 
 app.use('/api/products', productRoute)
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../frontend/build'))
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
-  })
-}
-
-const PORT = process.env.PORT || 5000
+const PORT = 5000
 
 app.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`))
