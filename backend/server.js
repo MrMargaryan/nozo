@@ -1,5 +1,4 @@
 import express from 'express'
-import data from './data'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
