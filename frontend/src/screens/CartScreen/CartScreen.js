@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart, removeFromCart } from '../../store/cart/actions'
-import airmax from '../../images/airmax.jpg'
 import Button from '../../components/Button/Button'
 
 import styles from './CartScreen.module.scss'
@@ -50,11 +49,11 @@ const CartScreen = ({ history }) => {
       <div className={styles.cart}>
         {
           products.map(product => {
-            const { id, name, brand, price, quantity, countInStock } = product
+            const { id, name, image, brand, price, quantity, countInStock } = product
 
             return (
               <div key={id} className={styles.cartItem}>
-                <img src={airmax} alt={name} className={styles.image} />
+                <img src={image} alt={name} className={styles.image} />
                 <div className={styles.content}>
                   <NavLink to={`/product/${id}`} className={styles.name}>{brand} / {name}</NavLink>
                   <select value={quantity} onChange={event => onQuantityChange(event, id)} className={styles.select}>
