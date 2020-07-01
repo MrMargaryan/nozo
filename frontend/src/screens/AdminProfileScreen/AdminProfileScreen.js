@@ -11,6 +11,7 @@ const AdminProfileScreen = ({ history }) => {
   const loaded = useSelector(({ addProduct }) => addProduct.loaded)
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
+  const [imagePreview, setImagePreview] = useState()
   const [brand, setBrand] = useState('Nike')
   const [price, setPrice] = useState()
   const [countInStock, setCountInStock] = useState()
@@ -22,7 +23,8 @@ const AdminProfileScreen = ({ history }) => {
   }
 
   const onImageChange = event => {
-    setImage(URL.createObjectURL(event.target.files[0]))
+    setImage(event.target.files[0])
+    setImagePreview(URL.createObjectURL(event.target.files[0]))
   }
 
   const onBrandChange = event => {
@@ -97,7 +99,7 @@ const AdminProfileScreen = ({ history }) => {
             onChange={onImageChange}
             className={styles.input}
           />
-          {image && <img src={image} alt={name} className={styles.image} />}
+          {image && <img src={imagePreview} alt={name} className={styles.image} />}
 
           <label htmlFor="brand" className={styles.label}>Бренд</label>
           <select name="brand" id="brand" onChange={onBrandChange} value={brand} className={styles.input}>

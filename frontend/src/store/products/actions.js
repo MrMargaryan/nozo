@@ -19,6 +19,11 @@ import {
   ADD_REVIEW_FAIL
 } from './types'
 import axios from 'axios'
+import dotenv from 'dotenv'
+
+dotenv.config()
+if (process.env.NODE_ENV !== 'production')
+  axios.defaults.baseURL = 'http://127.0.0.1:5000'
 
 export const fetchProduct = id => async dispatch => {
   try {
@@ -66,7 +71,23 @@ export const addProduct = product => async (dispatch, getState) => {
   try {
     const { user: { entities: { token } } } = getState()
 
-    await axios.post('/api/products', product, { headers: { token } })
+    const bodyFormData = new FormData()
+    bodyFormData.set('name', product.name)
+    bodyFormData.set('image', product.image)
+    bodyFormData.set('brand', product.brand)
+    bodyFormData.set('price', product.price)
+    bodyFormData.set('countInStock', product.countInStock)
+    bodyFormData.set('description', product.description)
+
+    await axios({
+      method: 'post',
+      url: '/api/products',
+      data: bodyFormData,
+      headers: {
+        token,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
 
     dispatch({
       type: ADD_PRODUCT_SUCCESS

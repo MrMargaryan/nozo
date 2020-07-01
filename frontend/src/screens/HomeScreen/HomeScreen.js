@@ -55,7 +55,6 @@ const HomeScreen = () => {
     } else if (error) {
       return <span>Извините, произошла ошибка</span>
     } else {
-      console.log(entities)
       return entities.map(({ _id, name, image, price, brand, rating, numReviews }) => {
         return (
           <Product

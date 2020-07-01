@@ -2,6 +2,18 @@ import express from 'express'
 import Product from '../models/productModel.js'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import multer from 'multer'
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + file.originalname)
+  }
+})
+
+const upload = multer({ storage })
 
 dotenv.config()
 
@@ -83,11 +95,11 @@ router.post('/review/:id', verify, async (req, res) => {
   }
 })
 
-router.post('/', verify, isAdmin, async (req, res) => {
+router.post('/', verify, isAdmin, upload.single('image'), async (req, res) => {
   try {
     const product = new Product({
       name: req.body.name,
-      image: req.body.image,
+      image: req.file.path,
       brand: req.body.brand,
       price: req.body.price,
       countInStock: req.body.countInStock,
