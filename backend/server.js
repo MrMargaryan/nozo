@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import path from 'path'
-import userRoute from './routes/userRoute'
+import userRoute from './routes/userRoute.js'
 import orderRoute from './routes/orderRoute'
 import productRoute from './routes/productRoute'
 
